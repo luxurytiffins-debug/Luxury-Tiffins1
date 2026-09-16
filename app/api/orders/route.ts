@@ -43,9 +43,8 @@ export async function POST(req:Request){
   if(products.length!==new Set(ids).size) return Response.json({error:"One or more products are unavailable."},{status:400});
    const lines: Array<{ product: (typeof products)[number]; quantity: number }> = body.items.map((i) => {
 const p = products.find(
-  (x: Product) => x.id === Number(i.productId)
+  (x) => x.id === Number(i.productId)
 );
-
 if (!p) {
   throw new Error(`Couldn't find product: ${i.productId}`);
 }
